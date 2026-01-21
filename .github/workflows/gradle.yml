@@ -2,7 +2,7 @@ name: Gradle Build
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
 
 jobs:
@@ -22,6 +22,11 @@ jobs:
       - name: Grant execute permission
         run: chmod +x gradlew
 
-      - name: Run Gradle build
+      - name: Build JAR
         run: ./gradlew build
 
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-jar
+          path: build/libs/*.jar
